@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>New Sails App</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%/* If you want to discourage search engines from indexing this site, uncomment the following line: */%>
-    <%/* <meta name="robots" content="noindex"> */%>
+        <%/* <meta name="robots" content="noindex"> */%>
 
 
-    <!--
+            <!--
         Stylesheets and Preprocessors
         ==============================
 
@@ -31,21 +32,21 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
-    <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
-    <!--STYLES END-->
+            <!--STYLES-->
+            <link rel="stylesheet" href="/styles/importer.css">
+            <!--STYLES END-->
 
-  <!-- 使用Bulma，添加Bulma CSS框架 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+            <!-- 使用Bulma，添加Bulma CSS框架 -->
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"> -->
 
-  </head>
+</head>
 
-  <body>
+<body>
     <%- body %>
 
 
 
-    <!--
+        <!--
         Client-side Templates
         ========================
 
@@ -66,11 +67,11 @@
               stringfile before they're served.
     -->
 
-    <!--TEMPLATES-->
-    <!--TEMPLATES END-->
+        <!--TEMPLATES-->
+        <!--TEMPLATES END-->
 
 
-    <!--
+        <!--
         Server-side View Locals
         ========================
 
@@ -86,7 +87,7 @@
     -->
 
 
-    <!--
+        <!--
 
       Client-side Javascript
       ========================
@@ -109,13 +110,21 @@
 
     -->
 
-    <!--SCRIPTS-->
-    <script src="/dependencies/sails.io.js"></script>
-    <!--SCRIPTS END-->
+        <!--SCRIPTS-->
+        <script src="/dependencies/sails.io.js"></script>
+        <script src="/js/echarts.js"></script>
+        <script src="/js/horizhist.js"></script>
+        <script src="/js/linetrend.js"></script>
+        <script src="/js/map.js"></script>
+        <script src="/js/myvisual.js"></script>
+        <script src="/js/probplot.js"></script>
+        <script src="/js/twowayhist.js"></script>
+        <!--SCRIPTS END-->
 
-  <!-- 在网页种使用fontawesome字体 -->
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <!-- 在网页种使用fontawesome字体 -->
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 
-  </body>
+</body>
+
 </html>
