@@ -10,9 +10,15 @@
 // <script src="js/probplot.js" type="text/javascript" charset="utf-8"></script>
 // <!-- 引入 horizhist.js -->
 // <script src="js/horizhist.js" type="text/javascript" charset="utf-8"></script>
-document.write('<script src="js/echarts.js" type="text/javascript" charset="utf-8"></script>');
-document.write('<script src="js/map.js" type="text/javascript" charset="utf-8"></script>');
-document.write('<script src="js/linetrend.js" type="text/javascript" charset="utf-8"></script>');
-document.write('<script src="js/twowayhist.js" type="text/javascript" charset="utf-8"></script>');
-document.write('<script src="js/probplot.js" type="text/javascript" charset="utf-8"></script>');
-document.write('<script src="js/horizhist.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/drawpic/echarts.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/drawpic/map.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/drawpic/linetrend.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/drawpic/twowayhist.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/drawpic/probplot.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/drawpic/horizhist.js" type="text/javascript" charset="utf-8"></script>');
+
+// <!-- 引入 jquerys.js -->
+document.write('<script src="js/readjson/jquerys.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readjson/case_num_mon.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readjson/mobility.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readjson/socio_eco_rela.js" type="text/javascript" charset="utf-8"></script>');

@@ -1,0 +1,86 @@
+{
+    "rows": 21,
+    "soecorela": [
+        {
+            "Relativity Value": 0.025461,
+            "Socio-Economic indicators name": "Total population (capita)/Total population in household registration (capita)"
+        },
+        {
+            "Relativity Value": 0.0181297,
+            "Socio-Economic indicators name": "Rural population  (capita)"
+        },
+        {
+            "Relativity Value": -3.68159,
+            "Socio-Economic indicators name": "Rural practitioners  (capita)"
+        },
+        {
+            "Relativity Value": -0.0090269,
+            "Socio-Economic indicators name": "May-September yield (Ton)"
+        },
+        {
+            "Relativity Value": 3.4438,
+            "Socio-Economic indicators name": "October - April(the following year) yield (Ton)"
+        },
+        {
+            "Relativity Value": 1.92678,
+            "Socio-Economic indicators name": "Financial (general) budget income (ten thousand yuan) / Public finance budget income (ten thousand yuan)"
+        },
+        {
+            "Relativity Value": 16.4834,
+            "Socio-Economic indicators name": "Financial (general) budget expenditure (ten thousand yuan) / public finance budget expenditure (ten thousand yuan)"
+        },
+        {
+            "Relativity Value": 0.0219333,
+            "Socio-Economic indicators name": "Number of rural households (household)"
+        },
+        {
+            "Relativity Value": 0.0151679,
+            "Socio-Economic indicators name": "Total number of households (household) / Total number of households in  household registration (household)"
+        },
+        {
+            "Relativity Value": 0.0472756,
+            "Socio-Economic indicators name": "Total grain yield (ton)"
+        },
+        {
+            "Relativity Value": 30.2718,
+            "Socio-Economic indicators name": "Total meat yield (ton)"
+        },
+        {
+            "Relativity Value": -10.9979,
+            "Socio-Economic indicators name": "Pigs out of the bar within the year (head)"
+        },
+        {
+            "Relativity Value": 10.4121,
+            "Socio-Economic indicators name": "Year-end live pig inventory (head)"
+        },
+        {
+            "Relativity Value": -2.35081,
+            "Socio-Economic indicators name": "Year-end large livestock inventory (head)"
+        },
+        {
+            "Relativity Value": 0.00599826,
+            "Socio-Economic indicators name": "Year-end cultivated land area  (mu)"
+        },
+        {
+            "Relativity Value": 23.2823,
+            "Socio-Economic indicators name": "Number of villager groups  (capita)"
+        },
+        {
+            "Relativity Value": -21.8652,
+            "Socio-Economic indicators name": "(Agriculture) Current total output value (ten thousand yuan)"
+        },
+        {
+            "Relativity Value": 20.3569,
+            "Socio-Economic indicators name": "Natural growth rate of population  (‰)"
+        },
+        {
+            "Relativity Value": -5.72998,
+            "Socio-Economic indicators name": "Per capita production of grain (kilogram)"
+        },
+        {
+            "Relativity Value": 0.985571,
+            "Socio-Economic indicators name": "Per capita net income of farmers (yuan) / Per capita disposable income of rural residents (yuan)"
+        }
+    ],
+    "title": "HistoricalAndPredictedCasesData.xlsx"
+}
