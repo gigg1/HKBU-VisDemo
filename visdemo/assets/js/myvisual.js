@@ -22,3 +22,10 @@ document.write('<script src="js/readjson/jquerys.js" type="text/javascript" char
 document.write('<script src="js/readjson/case_num_mon.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/readjson/mobility.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/readjson/socio_eco_rela.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readjson/tengchong.js" type="text/javascript" charset="utf-8"></script>');
+
+// <!-- 引入 readgeojson.js -->
+document.write('<script src="js/readgeojson/getmethod1.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readgeojson/getmethod2.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readgeojson/getjsonmethod1.js" type="text/javascript" charset="utf-8"></script>');
+document.write('<script src="js/readgeojson/getjsonmethod2.js" type="text/javascript" charset="utf-8"></script>');
