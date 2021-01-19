@@ -39,7 +39,7 @@
 <div id="tengchong_result"></div>
 
 
-<div id="map-wrap" class="echartcanvas"></div>
+<div id="map-wrap" style="height:800px;"></div>
 
 <div id="map-wrap2" class="echartcanvas"></div>
 <div id="map-wrap3" class="echartcanvas"></div>
@@ -57,7 +57,7 @@
     var mapChart;
     var option;
     //use json file to make map layer
-    $.get('json/beijing.json', function(beijingJson) {
+    $.get('json/Export_Output3.json', function(beijingJson) {
         echarts.registerMap('北京', beijingJson);
         mapChart = echarts.init(document.getElementById('map-wrap'));
         option = {
@@ -197,7 +197,7 @@
         var mapChart;
         var option;
 
-        $.get('json/heilongjiang.json', function(beijingJson) {
+        $.get('json/mydraw.json', function(beijingJson) {
             echarts.registerMap('北京', beijingJson);
             mapChart = echarts.init(document.getElementById('map-wrap3'));
             option = {
@@ -264,7 +264,7 @@
 
 <!-- 方法4 -->
 <script>
-    $.getJSON("json/yunnan.json", function(data) {
+    $.getJSON("json/Export_Output.json", function(data) {
         echarts.registerMap('xiamen', data);
         //定义div#map，给定width和height
         chart = echarts.init(document.getElementById('map-wrap4'));

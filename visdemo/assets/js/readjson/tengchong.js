@@ -2,6 +2,9 @@ $(document).ready(function() {
     $('#tengchong').click(function() {
         $.getJSON('json/TengChong.json', function(data) {
             var cell = "<ul>";
+            // $.each(data.geometries[1]["coordinates"][0], function(i, n) {
+            //     cell += "<li>" + n[0] + "</li>";
+            // });
             $.each(data.geometries, function(i, n) {
                 cell += "<li>" + n["type"] + n["coordinates"] + "</li>";
             });
