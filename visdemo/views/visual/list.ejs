@@ -1,7 +1,8 @@
 <div class="columns">
     <div class="column is-three-fifths">
         <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-        <div id="map-wrap" style="height:600px;"></div>
+        <!-- <div id="map-wrap" style="height:600px;"></div> -->
+        <div id="map" class="echartcanvas"></div>
         <div id="zuoxiajiao" class="echartcanvas"></div>
     </div>
     <div class="column">
@@ -9,7 +10,8 @@
         <div id="youshangjiao" class="echartcanvas"></div>
         <div id="youzhongjian" class="echartcanvas"></div>
         <div id="youxiajiao" class="echartcanvas"></div>
-        <div id="thematicMapDiv" class="echartcanvas"></div>
+        <!-- <div id="thematicMapDiv" class="echartcanvas"></div> -->
+
 
     </div>
 </div>
@@ -39,15 +41,20 @@
 <button id="tengchong_show">显示</button>
 <div id="tengchong_result"></div>
 
-<div id="map-wrap2" class="echartcanvas"></div>
+<!-- <div id="map-wrap2" class="echartcanvas"></div>
 <div id="map-wrap3" class="echartcanvas"></div>
-<div id="map-wrap4" class="echartcanvas"></div>
+<div id="map-wrap4" class="echartcanvas"></div> -->
 
-<div id="zuoshangjiao" class="echartcanvas"></div>
+<!-- <div id="zuoshangjiao" class="echartcanvas"></div> -->
 
-<div id="map-wrap5" class="echartcanvas"></div>
+<!-- <div id="map-wrap5" class="echartcanvas"></div> -->
+
+
 
 <!-- 使用自定义css，引入myvisual.css -->
 <link rel="stylesheet" type="text/css" href="css/myvisual.css">
 <!-- 使用自定义js，引入myvisual.js -->
 <script src="js/myvisual.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
