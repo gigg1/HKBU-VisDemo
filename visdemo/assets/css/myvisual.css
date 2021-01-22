@@ -1,6 +1,10 @@
 /* <!-- 使用Bulma，添加Bulma CSS框架 --> */
 
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css";
+
+/* <!-- 使用mapbox-gl框架 --> */
+
+@import "https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css";
 .echartcanvas {
     width: 600px;
     height: 400px;

@@ -55,7 +55,8 @@ $.get('json/Export_Output3.json', function(beijingJson) {
             aspectScale: 1.0, //长宽比. default: 0.75
             zoom: 1.1,
             // 可以移动地图
-            roam: true,
+            // roam: true,
+            roam: false,
             itemStyle: {
                 normal: {
                     label: {
