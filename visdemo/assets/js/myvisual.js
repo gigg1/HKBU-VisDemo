@@ -36,6 +36,7 @@ document.write('<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/ma
 document.write('<script src="js/drawpic/mapbox/mapbox-echarts.js"></script>');
 // document.write('<script src="js/drawpic/mapbox/method1.js"></script>');
 // document.write('<script src="js/drawpic/mapbox/method2.js"></script>');
+document.write('<script src="js/drawpic/mapbox/method3.js"></script>');
 document.write('<script src="js/drawpic/mapbox/mapbox_demo1.js"></script>');
 document.write('<script src="js/drawpic/mapbox/mapbox_demo2.js"></script>');
 

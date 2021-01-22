@@ -132,49 +132,8 @@
     // 方法五
     //初始化echart表
     function initEchart(id, options) {
-        var mychart;
-        var option;
-        //use json file to make map layer
-        $.get('json/Export_Output3.json', function(beijingJson) {
-            echarts.registerMap('云南省腾冲市', beijingJson);
-            mychart = echarts.init(document.getElementById('thematicchart360000'));
-            option = {
-                // 取消动画、保持与地图同步移动
-                animation: false,
-                title: {
-                    text: '云南腾冲县疫情分布图',
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{b}<br/>{c} (个)'
-                },
-
-
-                series: [{
-                    name: '腾冲市各县',
-                    type: 'map',
-                    map: '云南省腾冲市', // 自定义扩展图表类型
-                    aspectScale: 1.0, //长宽比. default: 0.75
-                    zoom: 1.1,
-                    // 可以移动地图
-                    roam: true,
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: true
-                            }
-                        },
-                        emphasis: {
-                            label: {
-                                show: true
-                            }
-                        }
-                    },
-                    data: [] //需要动态加载data内容
-                }]
-            }
-            mychart.setOption(option);
-        });
+        var mychart = echarts.init(document.getElementById(id));
+        mychart.setOption(options);
         return mychart;
     }
 
