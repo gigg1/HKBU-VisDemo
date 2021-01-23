@@ -37,8 +37,10 @@ document.write('<script src="js/drawpic/mapbox/mapbox-echarts.js"></script>');
 // document.write('<script src="js/drawpic/mapbox/method1.js"></script>');
 // document.write('<script src="js/drawpic/mapbox/method2.js"></script>');
 document.write('<script src="js/drawpic/mapbox/method3.js"></script>');
+document.write('<script src="js/drawpic/mapbox/mapbox_demo.js"></script>');
 document.write('<script src="js/drawpic/mapbox/mapbox_demo1.js"></script>');
 document.write('<script src="js/drawpic/mapbox/mapbox_demo2.js"></script>');
+document.write('<script src="js/drawpic/mapbox/mapbox_demo3.js"></script>');
 
 
 // <!-- 引入 variable.js -->

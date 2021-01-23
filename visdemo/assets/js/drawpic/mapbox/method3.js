@@ -49,7 +49,7 @@
         // var map = new mapboxgl.Map({
 
         window.map = new mapboxgl.Map({
-            container: 'map',
+            container: 'map1',
             style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
             // "name": "MaZhan", "cp": [98.41, 25.18]----定位到马站县
             center: [98.41, 25.18], // starting position [lng, lat]
@@ -198,11 +198,7 @@
             }
 
         });
-
-
-        console.log(data)
-
-
+        // console.log(data)
         var option1 = {
             tooltip: {
                 trigger: 'item',
@@ -212,7 +208,7 @@
                 name: element.XZQHMC,
                 type: "pie",
                 data: data,
-                radius: "30%",
+                radius: "20%",
                 center: ["50%", "50%"],
                 label: {
                     normal: {
