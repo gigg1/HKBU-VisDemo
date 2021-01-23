@@ -30,14 +30,13 @@
         date.push([now.getFullYear(), now.getMonth()].join('/'));
         // round() 方法可把一个数字舍入为最接近的整数; 对于0.5，该方法将进行上舍入。
         data.push(Math.round((Math.random() - 0.5) * 10 + data[i - 1]));
-        data1.push(Math.round((Math.random() - 0.5) * 50 + data1[i - 1]));
-        data2.push(Math.round((Math.random() - 0.5) * 100 + data1[i - 1]));
-        data3.push(Math.round((Math.random() - 0.5) * 150 + data1[i - 1]));
-        data4.push(Math.round((Math.random() - 0.5) * 200 + data1[i - 1]));
+        data1.push(Math.round((Math.random() - 0.4) * 50 + data1[i - 1]));
+        data2.push(Math.round((Math.random() - 0.3) * 100 + data1[i - 1]));
+        data3.push(Math.round((Math.random() - 0.2) * 150 + data1[i - 1]));
+        data4.push(Math.round((Math.random() - 0.1) * 200 + data1[i - 1]));
         // data.push(Math.round(data[i - 1]));
         // data1.push(Math.round(data1[i - 1]));
     }
-
 
 
     option = {
@@ -47,17 +46,15 @@
         //         return [pt[0], '10%'];
         //     }
         // },
-        tooltip: {
-            trigger: 'item',
-            formatter: '-->{c}'
-        },
+        tooltip: {},
         legend: {
             y: 'top',
             x: 'center',
             // 'scroll'：可滚动翻页的图例。当图例数量较多时可以使用。
             type: 'scroll',
             // 在legend里加上top属性，可直接写数字top：5，代表具体的5像素；也可以写top: ‘5%’，具体参考echarts官方文档配置手册里 legend。
-            top: '5%',
+            top: '8%',
+            left: '30%',
             // data: ['Growth', 'Budget 2011', 'Budget 2012'],
             // itemGap: 5
         },
@@ -100,57 +97,103 @@
                 name: 'Qushi',
                 type: 'line',
                 // 标记的图形
-                symbol: 'none',
+                symbol: 'emptyCircle',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
                 itemStyle: {
                     color: 'rgb(255, 70, 131)'
                 },
-                data: data
+                // 聚焦
+                emphasis: {
+                    focus: 'series',
+                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+                    blurScope: 'coordinateSystem'
+                },
+                data: data,
+                markLine: {
+                    lineStyle: {
+                        type: 'solid'
+                    },
+                    data: [{
+                        name: '预测分割线',
+                        xAxis: '2015/4',
+                        tooltip: {
+                            formatter: '{b}: {c}'
+                        }
+                    }, ],
+                    label: {
+                        formatter: 'predict'
+                    },
+
+                }
             }, {
                 name: 'HeShun',
                 type: 'line',
-                symbol: 'none',
+                symbol: 'emptyCircle',
                 sampling: 'lttb',
                 itemStyle: {
                     color: 'rgb(252, 170, 131)'
+                },
+                // 聚焦
+                emphasis: {
+                    focus: 'series',
+                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+                    blurScope: 'coordinateSystem'
                 },
                 data: data1
             }, {
                 name: 'WuHe',
                 type: 'line',
                 // 标记的图形
-                symbol: 'none',
+                symbol: 'emptyCircle',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
                 itemStyle: {
                     color: 'rgb(255, 74, 101)'
                 },
+                // 聚焦
+                emphasis: {
+                    focus: 'series',
+                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+                    blurScope: 'coordinateSystem'
+                },
                 data: data2
             }, {
                 name: 'XinHua',
                 type: 'line',
                 // 标记的图形
-                symbol: 'none',
+                symbol: 'emptyCircle',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
                 itemStyle: {
                     color: 'rgb(25, 20, 31)'
                 },
+                // 聚焦
+                emphasis: {
+                    focus: 'series',
+                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+                    blurScope: 'coordinateSystem'
+                },
                 data: data3
             }, {
                 name: 'JieTou',
                 type: 'line',
                 // 标记的图形
-                symbol: 'none',
+                symbol: 'emptyCircle',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
                 itemStyle: {
                     color: 'rgb(235, 20, 231)'
+                },
+                // 聚焦
+                emphasis: {
+                    focus: 'series',
+                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+                    blurScope: 'coordinateSystem'
                 },
                 data: data4
             }
@@ -161,39 +204,39 @@
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 
-    myChart.on('mouseover', function(params) { // 鼠标移入
-        // myChart.dispatchAction({
-        //     type: 'highlight',
-        //     seriesName: params.seriesName,
-        // })
+    // myChart.on('mouseover', function(params) { // 鼠标移入
+    //     // myChart.dispatchAction({
+    //     //     type: 'highlight',
+    //     //     seriesName: params.seriesName,
+    //     // })
 
-        myChart.setOption({ // 设置 鼠标移入后想要的样式
-            series: {
-                name: params.seriesName,
-                symbolSize: 20,
-                lineStyle: {
-                    width: 20
-                }
-            }
-        })
-    })
+    //     myChart.setOption({ // 设置 鼠标移入后想要的样式
+    //         series: {
+    //             name: params.seriesName,
+    //             symbolSize: 8,
+    //             lineStyle: {
+    //                 width: 8
+    //             }
+    //         }
+    //     })
+    // })
 
-    myChart.on('mouseout', function(params) { // 鼠标移出
-        // myChart.dispatchAction({
-        //     type: 'downplay',
-        //     seriesName: params.seriesName,
-        // })
+    // myChart.on('mouseout', function(params) { // 鼠标移出
+    //     // myChart.dispatchAction({
+    //     //     type: 'downplay',
+    //     //     seriesName: params.seriesName,
+    //     // })
 
-        myChart.setOption({ // 将样式复原
-            series: {
-                name: params.seriesName,
-                symbolSize: 2,
-                lineStyle: {
-                    width: 2
-                }
-            }
-        })
-    })
+    //     myChart.setOption({ // 将样式复原
+    //         series: {
+    //             name: params.seriesName,
+    //             symbolSize: 2,
+    //             lineStyle: {
+    //                 width: 2
+    //             }
+    //         }
+    //     })
+    // })
 
 
 })();
