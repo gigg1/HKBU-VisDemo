@@ -94,26 +94,18 @@
             end: 10
         }],
         series: [{
-                name: 'Qushi',
+                name: '预测线',
                 type: 'line',
-                // 标记的图形
-                symbol: 'emptyCircle',
+
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
                 itemStyle: {
                     color: 'rgb(255, 70, 131)'
                 },
-                // 聚焦
-                emphasis: {
-                    focus: 'series',
-                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
-                    blurScope: 'coordinateSystem'
-                },
-                data: data,
                 markLine: {
                     lineStyle: {
-                        type: 'solid'
+                        type: 'dashed'
                     },
                     data: [{
                         name: '预测分割线',
@@ -127,10 +119,31 @@
                     },
 
                 }
-            }, {
+            },
+            {
+                name: 'Qushi',
+                type: 'line',
+                // 标记的图形
+                symbol: 'diamond',
+                // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
+                sampling: 'lttb',
+                // 线的颜色
+                itemStyle: {
+                    color: 'rgb(255, 70, 131)'
+                },
+                // 聚焦
+                emphasis: {
+                    focus: 'series',
+                    // 在开启focus的时候，可以通过blurScope配置淡出的范围,'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+                    blurScope: 'coordinateSystem'
+                },
+                data: data,
+
+            },
+            {
                 name: 'HeShun',
                 type: 'line',
-                symbol: 'emptyCircle',
+                symbol: 'diamond',
                 sampling: 'lttb',
                 itemStyle: {
                     color: 'rgb(252, 170, 131)'
@@ -146,7 +159,7 @@
                 name: 'WuHe',
                 type: 'line',
                 // 标记的图形
-                symbol: 'emptyCircle',
+                symbol: 'diamond',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
@@ -164,7 +177,7 @@
                 name: 'XinHua',
                 type: 'line',
                 // 标记的图形
-                symbol: 'emptyCircle',
+                symbol: 'diamond',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
@@ -182,7 +195,7 @@
                 name: 'JieTou',
                 type: 'line',
                 // 标记的图形
-                symbol: 'emptyCircle',
+                symbol: 'diamond',
                 // 采用 Largest-Triangle-Three-Bucket 算法，可以最大程度保证采样后线条的趋势，形状和极值。
                 sampling: 'lttb',
                 // 线的颜色
