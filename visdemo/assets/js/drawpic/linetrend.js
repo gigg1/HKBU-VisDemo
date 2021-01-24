@@ -252,6 +252,11 @@
     // })
 
 
+    // 把配置项给实例对象，跟着浏览器同比例缩放
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    })
+
 })();
 
 
