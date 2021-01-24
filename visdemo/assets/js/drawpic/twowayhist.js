@@ -74,8 +74,16 @@
         yAxis: {
             name: 'Relatively Value',
         },
+        // grid: {
+        //     bottom: 100
+        // },
         grid: {
-            bottom: 100
+            left: '8%',
+            top: '20%',
+            right: '0%',
+            bottom: '4%',
+            // containLabel: true
+
         },
         series: [{
                 name: 'bar',
