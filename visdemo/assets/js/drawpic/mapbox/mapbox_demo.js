@@ -196,7 +196,12 @@
                 'type': 'symbol',
                 'source': 'rwanda-provinces',
                 'layout': {
-                    'icon-image': 'pulsing-dot'
+                    'icon-image': 'pulsing-dot',
+                    "text-field": ["get", "name"],
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 1.25], //设置图标与图标注相对之间的距离
+                    "text-anchor": "top",
+                    "icon-size": ["get", "childNum"], //图标的大小
                 }
             });
 
