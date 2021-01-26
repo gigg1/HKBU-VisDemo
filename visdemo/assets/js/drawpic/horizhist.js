@@ -6,7 +6,7 @@
     // (function($) {
     //     $(function() {
 
-    $.get('json/Export_Output.json', function(tengchongdata) {
+    $.get('json/Cases Number Monthly.json', function(Cases_Number_Monthly) {
 
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('youxiajiao'));
@@ -19,15 +19,66 @@
         // var agency = [];
         // data_set_from_json.push(agency);
 
-        // console.log(tengchongdata.features[0])
-        tengchongdata.features.forEach(element => {
-            agency = [];
-            agency.push(element.properties.childNum);
-            agency.push(element.properties.name);
-            data_set_from_json.push(agency)
-                // townname.push(element.properties.name);
-                // childNum.push(element.properties.childNum);
+
+        var date_set_from_json = [];
+        var TownName_set_from_json = [];
+        var a;
+        Cases_Number_Monthly.casenumbermonthly.forEach(element => {
+            if (element['Attributes'] === 'Historical') {
+                TownName_set_from_json.push(element['TownName']);
+                a = element['Month'].split("/");
+                a = a[2] + '/' + a[0] + '/' + a[1];
+                date_set_from_json.push(a);
+            }
         });
+        // 数组去重
+        date_set_from_json = [...new Set(date_set_from_json)];
+        // console.log(date_set_from_json)
+        TownName_set_from_json = [...new Set(TownName_set_from_json)];
+
+        var data_set_from_json = new Array(TownName_set_from_json.length);
+        for (var i = 0; i < data_set_from_json.length; i++) {
+            data_set_from_json[i] = new Array(date_set_from_json.length);
+        }
+
+
+        Cases_Number_Monthly.casenumbermonthly.forEach(element => {
+
+            if (element['Attributes'] === 'Historical') {
+                TownName_set_from_json.findIndex(function(TownName_value, TownName_index) {
+                    if (TownName_value === element['TownName']) {
+                        //则包含该元素
+                        a = element['Month'].split("/");
+                        a = a[2] + '/' + a[0] + '/' + a[1];
+                        date_set_from_json.findIndex(function(date_value, date_index) {
+                            if (date_value === a) {
+                                //则包含该元素
+                                data_set_from_json[TownName_index][date_index] = element['The number of cases']
+                                    // agency.push(date_index)
+                            }
+
+                        })
+                    }
+                })
+            }
+        });
+        // console.log(data_set_from_json)
+        for (var i = 0; i < data_set_from_json.length; i++) {
+            data_set_from_json[i] = eval(data_set_from_json[i].join("+"))
+        }
+
+        var data_set1_from_json = []
+            // console.log(tengchongdata.features[0])
+            // tengchongdata.features.forEach(element => {
+        for (var i = 0; i < data_set_from_json.length; i++) {
+            var agency = [];
+            agency.push(data_set_from_json[i]);
+            agency.push(TownName_set_from_json[i]);
+            data_set1_from_json.push(agency)
+        }
+        // townname.push(element.properties.name);
+        // childNum.push(element.properties.childNum);
+        // });
         // console.log(data_set_from_json)
         // data_set_from_json.sort();
         // data_set_from_json.reverse();
@@ -73,7 +124,7 @@
             }
             return arr;
         }
-        bubbleSort(data_set_from_json);
+        bubbleSort(data_set1_from_json);
         // console.log(data_set_from_json)；
         // ------------冒泡排序法(降序)-----------
 
@@ -121,7 +172,7 @@
             // },
             dataset: {
                 // source: data_set
-                source: data_set_from_json
+                source: data_set1_from_json
             },
             grid: { containLabel: true },
             xAxis: { name: 'amount' },
