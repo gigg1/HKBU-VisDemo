@@ -213,7 +213,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 0, "name": "QuShi", "cp": "[98.66,25.21]", "childNum": 1 },
+            "properties": { "id": 0, "name": "QuShi", "cp": "[98.66,25.21]", "childNum": 1, "color": "#807D76" },
             "id": "1"
         },
         {
@@ -258,7 +258,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 1, "name": "HeShun", "cp": [98.43, 25.03], "childNum": 3 },
+            "properties": { "id": 1, "name": "HeShun", "cp": [98.43, 25.03], "childNum": 3, "color": "#198008" },
             "id": "2"
         },
         {
@@ -500,7 +500,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 2, "name": "WuHe", "cp": [98.70, 24.85], "childNum": 5 },
+            "properties": { "id": 2, "name": "WuHe", "cp": [98.70, 24.85], "childNum": 5, "color": "#F1AFE8" },
             "id": "3"
         },
         {
@@ -667,7 +667,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 3, "name": "XinHua", "cp": [98.48, 24.75], "childNum": 10 },
+            "properties": { "id": 3, "name": "XinHua", "cp": [98.48, 24.75], "childNum": 10, "color": "#7D1FCF" },
             "id": "4"
         },
         {
@@ -1067,7 +1067,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 4, "name": "JieTou", "cp": [98.68, 24.53], "childNum": 15 },
+            "properties": { "id": 4, "name": "JieTou", "cp": [98.68, 24.53], "childNum": 15, "color": "#A2850E" },
             "id": "5"
         },
         {
@@ -1180,7 +1180,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 5, "name": "MaZhan", "cp": [98.41, 25.18], "childNum": 20 },
+            "properties": { "id": 5, "name": "MaZhan", "cp": [98.41, 25.18], "childNum": 20, "color": "#06948E" },
             "id": "6"
         },
         {
@@ -1340,7 +1340,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 6, "name": "HeHua", "cp": [98.37, 24.50], "childNum": 30 },
+            "properties": { "id": 6, "name": "HeHua", "cp": [98.37, 24.50], "childNum": 30, "color": "#F7EF13" },
             "id": "7"
         },
         {
@@ -1557,7 +1557,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 7, "name": "MangBang", "cp": [98.68, 24.98], "childNum": 40 },
+            "properties": { "id": 7, "name": "MangBang", "cp": [98.68, 24.98], "childNum": 40, "color": "#F7C703" },
             "id": "8"
         },
         {
@@ -1852,7 +1852,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 8, "name": "TuanTian", "cp": [98.62, 24.70], "childNum": 50 },
+            "properties": { "id": 8, "name": "TuanTian", "cp": [98.62, 24.70], "childNum": 50, "color": "#EC5BD8" },
             "id": "9"
         },
         {
@@ -2004,7 +2004,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 9, "name": "QingShui", "cp": [98.48, 24.80], "childNum": 60 },
+            "properties": { "id": 9, "name": "QingShui", "cp": [98.48, 24.80], "childNum": 60, "color": "#E7C765" },
             "id": "10"
         },
         {
@@ -2115,7 +2115,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 10, "name": "BeiHai", "cp": [98.58, 25.08], "childNum": 88 },
+            "properties": { "id": 10, "name": "BeiHai", "cp": [98.58, 25.08], "childNum": 88, "color": "#08729F" },
             "id": "11"
         },
         {
@@ -2327,7 +2327,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 11, "name": "PuChan", "cp": [98.57, 24.67], "childNum": 90 },
+            "properties": { "id": 11, "name": "PuChan", "cp": [98.57, 24.67], "childNum": 90, "color": "#EF1616" },
             "id": "12"
         },
         {
@@ -2433,7 +2433,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 12, "name": "GuDong", "cp": [98.45, 25.30], "childNum": 92 },
+            "properties": { "id": 12, "name": "GuDong", "cp": [98.45, 25.30], "childNum": 92, "color": "#F7C716" },
             "id": "13"
         },
         {
@@ -2641,7 +2641,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 13, "name": "ZhongHe", "cp": [98.30, 25.30], "childNum": 100 },
+            "properties": { "id": 13, "name": "ZhongHe", "cp": [98.30, 25.30], "childNum": 100, "color": "#C39BE6" },
             "id": "14"
         },
         {
@@ -2834,7 +2834,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 14, "name": "TengYue", "cp": [98.52, 24.73], "childNum": 150 },
+            "properties": { "id": 14, "name": "TengYue", "cp": [98.52, 24.73], "childNum": 150, "color": "#C3C1BB" },
             "id": "15"
         },
         {
@@ -3094,7 +3094,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 15, "name": "DianTan", "cp": [98.38, 25.47], "childNum": 200 },
+            "properties": { "id": 15, "name": "DianTan", "cp": [98.38, 25.47], "childNum": 200, "color": "#63C8D5" },
             "id": "16"
         },
         {
@@ -3520,7 +3520,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 16, "name": "MingGuang", "cp": [98.50, 25.72], "childNum": 500 },
+            "properties": { "id": 16, "name": "MingGuang", "cp": [98.50, 25.72], "childNum": 500, "color": "#04C1DC" },
             "id": "17"
         },
         {
@@ -4205,7 +4205,7 @@
                     ]
                 ]
             },
-            "properties": { "id": 17, "name": "HouQiao", "cp": [98.25, 25.47], "childNum": 1000 },
+            "properties": { "id": 17, "name": "HouQiao", "cp": [98.25, 25.47], "childNum": 1000, "color": "#85F473" },
             "id": "18"
         }
     ]
