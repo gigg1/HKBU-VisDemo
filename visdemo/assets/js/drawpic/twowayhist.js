@@ -18,7 +18,7 @@
             data_set_from_json.push(element['Relativity Value']);
             xAxisData.push(element['Socio-Economic indicators name']);
         });
-        console.log(data_set_from_json)
+        // console.log(data_set_from_json)
 
         // for (var i = 0; i < 20; i++) {
         //     xAxisData.push('Class' + i);
