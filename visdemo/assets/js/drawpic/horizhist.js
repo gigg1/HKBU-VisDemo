@@ -15,9 +15,9 @@
         // var townname = ['townname'];
         // var childNum = ['amount'];
         var data_set_from_json = [];
-        data_set_from_json.push(['amount', 'townname']);
-        var agency = [];
-        data_set_from_json.push(agency);
+        // data_set_from_json.push(['amount', 'townname']);
+        // var agency = [];
+        // data_set_from_json.push(agency);
 
         // console.log(tengchongdata.features[0])
         tengchongdata.features.forEach(element => {
@@ -29,7 +29,53 @@
                 // childNum.push(element.properties.childNum);
         });
         // console.log(data_set_from_json)
+        // data_set_from_json.sort();
+        // data_set_from_json.reverse();
 
+
+        // ------------冒泡排序法(升序)-----------
+        // var arr = [3, 4, 1, 2];
+
+        // function bubbleSort(arr) {
+        //     for (var j = 0; j < arr.length - 1; j++) {
+        //         // 这里要根据外层for循环的 j，逐渐减少内层 for循环的次数
+        //         for (var i = 0; i < arr.length - 1 - j; i++) {
+        //             if (arr[i] > arr[i + 1]) {
+        //                 var temp = arr[i];
+        //                 arr[i] = arr[i + 1];
+        //                 arr[i + 1] = temp;
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+        // bubbleSort(arr);
+        // console.log(arr);
+        // ------------冒泡排序法(升序)-----------
+
+        // ------------冒泡排序法(降序)-----------
+        function bubbleSort(arr) {
+            var max = arr.length - 1;
+            for (var j = 0; j < max; j++) {
+                // 声明一个变量，作为标志位
+                var done = true;
+                for (var i = 0; i < max - j; i++) {
+                    if (arr[i][0] < arr[i + 1][0]) {
+                        var temp = arr[i];
+                        arr[i] = arr[i + 1];
+                        arr[i + 1] = temp;
+                        done = false;
+                    }
+                }
+                if (done) {
+                    break;
+                }
+            }
+            return arr;
+        }
+        bubbleSort(data_set_from_json);
+        // console.log(data_set_from_json)；
+        // ------------冒泡排序法(降序)-----------
 
         // console.log(townname)
         // console.log(childNum)
