@@ -4,8 +4,10 @@
 
     $.get('json/Export_Output.json', function(geojson_info) {
         window.geojson_info = new Array();
+        window.area_chosen_state = new Array();
         geojson_info.features.forEach(element => {
             window.geojson_info[element.properties.name] = element.properties.id + 1;
+            window.area_chosen_state[element.id] = false;
 
         });
     });
@@ -220,7 +222,7 @@
                 },
             });
 
-
+            var muti_chosen_mark = false;
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
             window.colorList_clear = ['rgba(255,73,51, 0.1)', 'rgba(52,152,219, 0.1)', 'rgba(244,208,63, 0.1)', 'rgba(108,52,131, 0.1)', 'rgba(255,140,51, 0.1)', 'rgba(46,204,113, 0.1)', 'rgba(41,128,185, 0.1)', 'rgba(51,183,255, 0.1)', 'rgba(51,78,255, 0.1)', 'rgba(203,51,255, 0.1)', 'rgba(148,49,38, 0.1)', 'rgba(194,53,49, 0.1)', 'rgba(47,69,84, 0.1)', 'rgba(97,160,168, 0.1)', 'rgba(212,130,101, 0.1)', 'rgba(145,199,174, 0.1)', 'rgba(116,159,131, 0.1)', 'rgba(202,134,34, 0.1)'];
@@ -245,29 +247,37 @@
                         if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
                             window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
                     }
-                    window.linetrend_myChart.setOption(window.linetrend_option);
+                    // console.log(window.linetrend_myChart.getOption())
+                    // window.linetrend_myChart.setOption(window.linetrend_option);
+                    window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
+                        notMerge: false
+                            // replaceMerge: ['series']
+                            // lazyUpdate:false
+                    });
                     window.hl_line_mark = e.features[0].properties.id;
 
                 }
 
                 // console.log(e.features[0])
                 // console.log(hoveredStateId)
-                if (e.features.length > 0) {
-                    if (hoveredStateId) {
+                if (!area_chosen_state[e.features[0].id]) {
+                    if (e.features.length > 0) {
+                        if (hoveredStateId) {
+                            map.setFeatureState({
+                                source: 'rwanda-provinces',
+                                id: hoveredStateId
+                            }, {
+                                hover: false
+                            });
+                        }
+                        hoveredStateId = e.features[0].id;
                         map.setFeatureState({
                             source: 'rwanda-provinces',
                             id: hoveredStateId
                         }, {
-                            hover: false
+                            hover: true
                         });
                     }
-                    hoveredStateId = e.features[0].id;
-                    map.setFeatureState({
-                        source: 'rwanda-provinces',
-                        id: hoveredStateId
-                    }, {
-                        hover: true
-                    });
                 }
             });
 
@@ -275,13 +285,43 @@
             map.on('mouseenter', 'rwanda-provinces', function() {
                 map.getCanvas().style.cursor = 'pointer';
             });
+
             // When a click event occurs on a feature in the states layer, open a popup at the
             // location of the click, with description HTML from its properties.
             map.on('click', 'rwanda-provinces', function(e) {
-                new mapboxgl.Popup()
-                    .setLngLat(e.lngLat)
-                    .setHTML(e.features[0].properties.childNum)
-                    .addTo(map);
+                // new mapboxgl.Popup()
+                //     .setLngLat(e.lngLat)
+                //     .setHTML(e.features[0].properties.childNum)
+                //     .addTo(map);
+
+
+                if (!area_chosen_state[e.features[0].id]) {
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({
+                        source: 'rwanda-provinces',
+                        id: hoveredStateId
+                    }, {
+                        hover: true
+                    });
+                    area_chosen_state[e.features[0].id] = true;
+                    muti_chosen_mark = true;
+                    hoveredStateId = null;
+                } else {
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({
+                        source: 'rwanda-provinces',
+                        id: hoveredStateId
+                    }, {
+                        hover: false
+                    });
+                    area_chosen_state[e.features[0].id] = false;
+                    muti_chosen_mark = true;
+                    // console.log(Object.values(area_chosen_state))
+                    if (Object.values(area_chosen_state).indexOf(true) == -1) {
+                        muti_chosen_mark = false;
+                    }
+                }
+
             });
 
 
@@ -300,7 +340,8 @@
 
                 }
 
-
+                // 如果有选中则关闭默认的鼠标移动高亮地图功能
+                // if (!muti_chosen_mark) {
                 if (hoveredStateId) {
                     map.setFeatureState({
                         source: 'rwanda-provinces',
@@ -311,6 +352,7 @@
                 }
                 hoveredStateId = null;
                 map.getCanvas().style.cursor = '';
+                // }
             });
 
 
@@ -704,10 +746,10 @@
             // alert(param.type); //X轴的值
             // alert(param.seriesIndex); //X轴的值
             // alert(param.dataIndex); //X轴的值
-            console.log(window.geojson_info);
+            // console.log(window.geojson_info);
             var distID = window.geojson_info[param.seriesName];
-            console.log(param.seriesName);
-            console.log(distID);
+            // console.log(param.seriesName);
+            // console.log(distID);
             if (distID) {
                 if (hoveredStateId) {
                     map.setFeatureState({
