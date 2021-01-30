@@ -202,7 +202,12 @@
                     "text-offset": [0, 1.25], //设置图标与图标注相对之间的距离
                     "text-anchor": "top",
                     "icon-size": ["get", "childNum"], //图标的大小
-                }
+                },
+                'paint': {
+                    "text-halo-color": "rgb(255,255,255)",
+                    "text-halo-width": 2,
+                    // 'fill-opacity': 0.1
+                },
             });
 
 

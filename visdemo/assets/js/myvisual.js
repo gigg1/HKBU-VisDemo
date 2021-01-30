@@ -10,6 +10,8 @@
 // <script src="js/probplot.js" type="text/javascript" charset="utf-8"></script>
 // <!-- 引入 horizhist.js -->
 // <script src="js/horizhist.js" type="text/javascript" charset="utf-8"></script>
+// jquery引入需要在使用之前，不然debug检查会有识别不到$的报错
+document.write('<script src="js/readjson/jquerys.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/drawpic/echarts.js" type="text/javascript" charset="utf-8"></script>');
 // document.write('<script src="js/drawpic/map.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/drawpic/linetrend.js" type="text/javascript" charset="utf-8"></script>');
