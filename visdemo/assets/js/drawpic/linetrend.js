@@ -229,33 +229,39 @@
             map.on('mousemove', 'rwanda-provinces', function(e) {
                 // console.log(window.hl_line_mark)
                 // console.log(e.features[0].properties.id)
-                if (window.hl_line_mark != e.features[0].properties.id) {
-                    for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
-                        // console.log(window.linetrend_option.series[i + 1].name);
-                        // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
-                        window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
-                    }
-                    window.linetrend_myChart.setOption(window.linetrend_option);
-                    // console.log(hl_line_mark);
-                    // console.log(e.features[0].properties)
-                    // console.log(e.features[0].properties.name);
-                    // console.log(window.linetrend_option.series);
-                    // console.log(colorList.length);
-                    // console.log(window.linetrend_option.series[1].name);
-                    for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
-                        // console.log(window.linetrend_option.series[i + 1].name);
-                        if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
-                            window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
-                    }
-                    // console.log(window.linetrend_myChart.getOption())
-                    // window.linetrend_myChart.setOption(window.linetrend_option);
-                    window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
-                        notMerge: false
-                            // replaceMerge: ['series']
-                            // lazyUpdate:false
-                    });
-                    window.hl_line_mark = e.features[0].properties.id;
+                if (!muti_chosen_mark) {
+                    if (window.hl_line_mark != e.features[0].properties.id) {
+                        for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                            // console.log(window.linetrend_option.series[i + 1].name);
+                            // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                            window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                        }
+                        window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
+                            notMerge: false
+                                // replaceMerge: ['series']
+                                // lazyUpdate:false
+                        });
+                        // console.log(hl_line_mark);
+                        // console.log(e.features[0].properties)
+                        // console.log(e.features[0].properties.name);
+                        // console.log(window.linetrend_option.series);
+                        // console.log(colorList.length);
+                        // console.log(window.linetrend_option.series[1].name);
+                        for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                            // console.log(window.linetrend_option.series[i + 1].name);
+                            if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                                window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
+                        }
+                        // console.log(window.linetrend_myChart.getOption())
+                        // window.linetrend_myChart.setOption(window.linetrend_option);
+                        window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
+                            notMerge: false
+                                // replaceMerge: ['series']
+                                // lazyUpdate:false
+                        });
+                        window.hl_line_mark = e.features[0].properties.id;
 
+                    }
                 }
 
                 // console.log(e.features[0])
@@ -303,6 +309,26 @@
                 //     .setHTML(e.features[0].properties.childNum)
                 //     .addTo(map);
 
+                for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                    // console.log(window.linetrend_option.series[i + 1].name);
+                    if (window.linetrend_option.series[i + 1].name == e.features[0].properties.name) {
+                        // console.log(area_chosen_state[e.features[0].id])
+                        if (area_chosen_state[e.features[0].id]) {
+                            window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
+                        } else {
+                            window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                        }
+                    }
+                }
+                // console.log(window.linetrend_myChart.getOption())
+                // window.linetrend_myChart.setOption(window.linetrend_option);
+                window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
+                    notMerge: false
+                        // replaceMerge: ['series']
+                        // lazyUpdate:false
+                });
+
+
 
                 if (!area_chosen_state[e.features[0].id]) {
                     hoveredStateId = e.features[0].id;
@@ -337,16 +363,22 @@
             // When the mouse leaves the state-fill layer, update the feature state of the
             // previously hovered feature.
             map.on('mouseleave', 'rwanda-provinces', function() {
-                if (window.hl_line_mark != -1) {
-                    // console.log(hl_line_mark);
-                    for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
-                        // console.log(window.linetrend_option.series[i + 1].name);
-                        // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
-                        window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
-                    }
-                    window.linetrend_myChart.setOption(window.linetrend_option);
-                    window.hl_line_mark = -1;
+                if (!muti_chosen_mark) {
+                    if (window.hl_line_mark != -1) {
+                        // console.log(hl_line_mark);
+                        for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                            // console.log(window.linetrend_option.series[i + 1].name);
+                            // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                            window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                        }
+                        window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
+                            notMerge: false
+                                // replaceMerge: ['series']
+                                // lazyUpdate:false
+                        });
+                        window.hl_line_mark = -1;
 
+                    }
                 }
 
                 // 如果有选中则关闭默认的鼠标移动高亮地图功能
