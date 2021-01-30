@@ -5,7 +5,9 @@
 
     $.get('json/Cases Number Monthly.json', function(Cases_Number_Monthly) {
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('zuoxiajiao'));
+        // var myChart = echarts.init(document.getElementById('zuoxiajiao'));
+        window.linetrend_myChart = echarts.init(document.getElementById('zuoxiajiao'));
+
 
         // 指定图表的配置项和数据
         var base = +new Date(2006, 12, 30);
@@ -49,7 +51,7 @@
         date_set_from_json = [...new Set(date_set_from_json)];
         // console.log(date_set_from_json)
         TownName_set_from_json = [...new Set(TownName_set_from_json)];
-
+        // TownName_set_from_json.sort();
         // console.log(TownName_set_from_json)
         // console.log(date_set_from_json)
 
@@ -88,8 +90,10 @@
         // console.log(agency)
         // console.log(data_set_from_json)
         var series_all_sum = [];
-        var colorList = ['#FF4933', '#3498DB', '#F4D03F ', '#6C3483 ', '#FF8C33', '#2ECC71', '#2980B9', '#33B7FF', '#334EFF', '#CB33FF', '#943126', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622'];
-
+        // var colorList = ['#FF4933', '#3498DB', '#F4D03F ', '#6C3483 ', '#FF8C33', '#2ECC71', '#2980B9', '#33B7FF', '#334EFF', '#CB33FF', '#943126', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622'];
+        window.colorList = ['rgba(255,73,51, 1)', 'rgba(52,152,219, 1)', 'rgba(244,208,63, 1)', 'rgba(108,52,131, 1)', 'rgba(255,140,51, 1)', 'rgba(46,204,113, 1)', 'rgba(41,128,185, 1)', 'rgba(51,183,255, 1)', 'rgba(51,78,255, 1)', 'rgba(203,51,255, 1)', 'rgba(148,49,38, 1)', 'rgba(194,53,49, 1)', 'rgba(47,69,84, 1)', 'rgba(97,160,168, 1)', 'rgba(212,130,101, 1)', 'rgba(145,199,174, 1)', 'rgba(116,159,131, 1)', 'rgba(202,134,34, 1)'];
+        // console.log(colorList.length)
+        window.hl_line_mark = -1;
 
         series_all_sum.push({
             name: 'predict line',
@@ -130,7 +134,7 @@
             series_clause.itemStyle = {
                 // color: 'rgb(255, 70, 131)'
                 // color: '#1A5276'
-                color: colorList[i]
+                color: window.colorList[i]
             };
             series_clause.emphasis = {
                 focus: 'series',
@@ -169,7 +173,7 @@
         // console.log(date)
 
 
-        option = {
+        window.linetrend_option = {
             // tooltip: {
             //     trigger: 'axis',
             //     position: function(pt) {
@@ -367,7 +371,8 @@
             // ]
         };
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        // myChart.setOption(option);
+        window.linetrend_myChart.setOption(window.linetrend_option);
 
         // myChart.on('mouseover', function(params) { // 鼠标移入
         //     // myChart.dispatchAction({
@@ -406,7 +411,7 @@
 
         // 把配置项给实例对象，跟着浏览器同比例缩放
         window.addEventListener('resize', function() {
-            myChart.resize();
+            window.linetrend_myChart.resize();
         })
     });
 

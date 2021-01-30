@@ -213,7 +213,35 @@
 
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
+            window.colorList_clear = ['rgba(255,73,51, 0.1)', 'rgba(52,152,219, 0.1)', 'rgba(244,208,63, 0.1)', 'rgba(108,52,131, 0.1)', 'rgba(255,140,51, 0.1)', 'rgba(46,204,113, 0.1)', 'rgba(41,128,185, 0.1)', 'rgba(51,183,255, 0.1)', 'rgba(51,78,255, 0.1)', 'rgba(203,51,255, 0.1)', 'rgba(148,49,38, 0.1)', 'rgba(194,53,49, 0.1)', 'rgba(47,69,84, 0.1)', 'rgba(97,160,168, 0.1)', 'rgba(212,130,101, 0.1)', 'rgba(145,199,174, 0.1)', 'rgba(116,159,131, 0.1)', 'rgba(202,134,34, 0.1)'];
             map.on('mousemove', 'rwanda-provinces', function(e) {
+                // console.log(window.hl_line_mark)
+                // console.log(e.features[0].properties.id)
+                if (window.hl_line_mark != e.features[0].properties.id) {
+                    for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                        // console.log(window.linetrend_option.series[i + 1].name);
+                        // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                        window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                    }
+                    window.linetrend_myChart.setOption(window.linetrend_option);
+                    // console.log(hl_line_mark);
+                    // console.log(e.features[0].properties)
+                    // console.log(e.features[0].properties.name);
+                    // console.log(window.linetrend_option.series);
+                    // console.log(colorList.length);
+                    // console.log(window.linetrend_option.series[1].name);
+                    for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                        // console.log(window.linetrend_option.series[i + 1].name);
+                        if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                            window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
+                    }
+                    window.linetrend_myChart.setOption(window.linetrend_option);
+                    window.hl_line_mark = e.features[0].properties.id;
+
+                }
+
+
+
                 if (e.features.length > 0) {
                     if (hoveredStateId) {
                         map.setFeatureState({
@@ -249,6 +277,19 @@
             // When the mouse leaves the state-fill layer, update the feature state of the
             // previously hovered feature.
             map.on('mouseleave', 'rwanda-provinces', function() {
+                if (window.hl_line_mark != -1) {
+                    // console.log(hl_line_mark);
+                    for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+                        // console.log(window.linetrend_option.series[i + 1].name);
+                        // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                        window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                    }
+                    window.linetrend_myChart.setOption(window.linetrend_option);
+                    window.hl_line_mark = -1;
+
+                }
+
+
                 if (hoveredStateId) {
                     map.setFeatureState({
                         source: 'rwanda-provinces',
