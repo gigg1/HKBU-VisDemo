@@ -639,15 +639,58 @@
                     return value.max + 10;
                 }
             },
+            // dataZoom: [{
+            //     type: 'inside',
+            //     // 拉条一开始显示的范围
+            //     start: 0,
+            //     // end: 10
+            //     end: 100
+            // }, {
+            //     start: 0,
+            //     end: 10
+            // }],
+
             dataZoom: [{
-                type: 'inside',
-                // 拉条一开始显示的范围
+                type: 'slider',
+                xAxisIndex: 0,
+                filterMode: 'weakFilter',
+                // height: 20,
+                // bottom: 0,
                 start: 0,
-                // end: 10
-                end: 100
+                end: 100,
+                // handleIcon: 'path://M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                // handleSize: '80%',
+                showDetail: true
             }, {
+                type: 'inside',
+                id: 'insideX',
+                xAxisIndex: 0,
+                filterMode: 'weakFilter',
                 start: 0,
-                end: 10
+                end: 26,
+                zoomOnMouseWheel: true,
+                moveOnMouseMove: true
+            }, {
+                type: 'slider',
+                yAxisIndex: 0,
+                zoomLock: true,
+                width: 10,
+                right: 10,
+                top: 70,
+                bottom: 20,
+                start: 0,
+                end: 100,
+                handleSize: 0,
+                showDetail: false,
+            }, {
+                type: 'inside',
+                id: 'insideY',
+                yAxisIndex: 0,
+                start: 95,
+                end: 100,
+                zoomOnMouseWheel: true,
+                moveOnMouseMove: true,
+                moveOnMouseWheel: true
             }],
 
             series: series_all_sum
@@ -791,22 +834,25 @@
             var distID = window.geojson_info[param.seriesName];
             // console.log(param.seriesName);
             // console.log(distID);
-            if (distID) {
-                if (hoveredStateId) {
+            // console.log(area_chosen_state[distID])
+            if (!area_chosen_state[distID]) {
+                if (distID) {
+                    if (hoveredStateId) {
+                        map.setFeatureState({
+                            source: 'rwanda-provinces',
+                            id: hoveredStateId
+                        }, {
+                            hover: false
+                        });
+                    }
+                    hoveredStateId = distID;
                     map.setFeatureState({
                         source: 'rwanda-provinces',
                         id: hoveredStateId
                     }, {
-                        hover: false
+                        hover: true
                     });
                 }
-                hoveredStateId = distID;
-                map.setFeatureState({
-                    source: 'rwanda-provinces',
-                    id: hoveredStateId
-                }, {
-                    hover: true
-                });
             }
         });
 
@@ -823,6 +869,39 @@
             hoveredStateId = null;
             map.getCanvas().style.cursor = '';
         });
+
+
+        // window.linetrend_myChart.on('click', function(param) {
+
+        //     window.linetrend_myChart.dispatchAction({
+        //         type: 'legendInverseSelect'
+        //     })
+        //     window.linetrend_myChart.dispatchAction({
+        //         type: 'legendSelect',
+        //         // 图例名称
+        //         name: param.seriesName
+        //     })
+        // });
+
+        // 获取位置触发的函数
+        // window.linetrend_myChart.getZr().on('click', params => {
+        //     const pointInPixel = [params.offsetX, params.offsetY];
+        //     // console.log(pointInPixel)
+        //     if (window.linetrend_myChart.containPixel('grid', pointInPixel)) {
+        //         let xIndex = window.linetrend_myChart.convertFromPixel({
+        //             seriesIndex: 0
+        //         }, [params.offsetX, params.offsetY])[0];
+        //         /*事件处理代码书写位置*/
+        //         // console.log(xIndex)
+        //         console.log(params)
+        //         let abc = window.linetrend_myChart.containPixel({
+        //             seriesName: 'Beiai'
+        //         }, [params.offsetX, params.offsetY]);
+        //         /*事件处理代码书写位置*/
+        //         console.log(abc)
+
+        //     }
+        // });
 
 
         // 使用刚指定的配置项和数据显示图表。
