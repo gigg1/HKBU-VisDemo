@@ -240,8 +240,8 @@
 
                 }
 
-
-
+                // console.log(e.features[0])
+                // console.log(hoveredStateId)
                 if (e.features.length > 0) {
                     if (hoveredStateId) {
                         map.setFeatureState({
@@ -261,6 +261,7 @@
                 }
             });
 
+            // 鼠标点击后移动到地图的提示框中，鼠标的样式变回正常模式
             map.on('mouseenter', 'rwanda-provinces', function() {
                 map.getCanvas().style.cursor = 'pointer';
             });

@@ -20,14 +20,14 @@ document.write('<script src="js/drawpic/probplot.js" type="text/javascript" char
 document.write('<script src="js/drawpic/horizhist.js" type="text/javascript" charset="utf-8"></script>');
 
 // <!-- 引入 jquerys.js -->
-document.write('<script src="js/readjson/jquerys.js" type="text/javascript" charset="utf-8"></script>');
+// document.write('<script src="js/readjson/jquerys.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/readjson/case_num_mon.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/readjson/mobility.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/readjson/socio_eco_rela.js" type="text/javascript" charset="utf-8"></script>');
 document.write('<script src="js/readjson/tengchong.js" type="text/javascript" charset="utf-8"></script>');
 
 // <!-- 引入 readgeojson.js -->
-document.write('<script src="js/readgeojson/getmethod1.js" type="text/javascript" charset="utf-8"></script>');
+// document.write('<script src="js/readgeojson/getmethod1.js" type="text/javascript" charset="utf-8"></script>');
 // document.write('<script src="js/readgeojson/getmethod2.js" type="text/javascript" charset="utf-8"></script>');
 // document.write('<script src="js/readgeojson/getjsonmethod1.js" type="text/javascript" charset="utf-8"></script>');
 // document.write('<script src="js/readgeojson/getjsonmethod2.js" type="text/javascript" charset="utf-8"></script>');
@@ -38,11 +38,11 @@ document.write('<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/ma
 document.write('<script src="js/drawpic/mapbox/mapbox-echarts.js"></script>');
 // document.write('<script src="js/drawpic/mapbox/method1.js"></script>');
 // document.write('<script src="js/drawpic/mapbox/method2.js"></script>');
-document.write('<script src="js/drawpic/mapbox/method3.js"></script>');
-document.write('<script src="js/drawpic/mapbox/mapbox_demo.js"></script>');
-document.write('<script src="js/drawpic/mapbox/mapbox_demo1.js"></script>');
-document.write('<script src="js/drawpic/mapbox/mapbox_demo2.js"></script>');
-document.write('<script src="js/drawpic/mapbox/mapbox_demo3.js"></script>');
+// document.write('<script src="js/drawpic/mapbox/method3.js"></script>');
+// document.write('<script src="js/drawpic/mapbox/mapbox_demo.js"></script>');
+// document.write('<script src="js/drawpic/mapbox/mapbox_demo1.js"></script>');
+// document.write('<script src="js/drawpic/mapbox/mapbox_demo2.js"></script>');
+// document.write('<script src="js/drawpic/mapbox/mapbox_demo3.js"></script>');
 
 
 // <!-- 引入 variable.js -->
