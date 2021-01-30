@@ -278,6 +278,15 @@
                             hover: true
                         });
                     }
+                } else {
+                    if (hoveredStateId) {
+                        map.setFeatureState({
+                            source: 'rwanda-provinces',
+                            id: hoveredStateId
+                        }, {
+                            hover: false
+                        });
+                    }
                 }
             });
 
