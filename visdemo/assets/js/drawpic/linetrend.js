@@ -11,6 +11,7 @@
 
         });
     });
+    // console.log(window.geojson_info)
 
 
     $.get('json/Cases Number Monthly.json', function(Cases_Number_Monthly) {
@@ -874,28 +875,272 @@
 
 
         window.linetrend_myChart.on('datazoom', function(param) {
+            // console.log(param)
             var xAxis = linetrend_myChart.getModel().option.xAxis[0];
             // var endTime = xAxis.data[xAxis.rangeEnd];
 
             // 获取时间轴上有多少个节点
             // console.log(xAxis)
             // console.log(xAxis.data.length)
+
+
+
+            // ----------------读取和处理柱状图的数据---------------
+            // var data_set = [
+            //     [1, 'QuShi'],
+            //     [3, 'HeShun'],
+            //     [5, 'WuHe'],
+            //     [10, 'XinHua'],
+            //     [100, 'JieTou'],
+            //     [144, 'MaZhan'],
+            //     [233, 'HeHua'],
+            //     [445, 'MangBang'],
+            //     [666, 'TuanTian'],
+            //     [777, 'QingShui'],
+            //     [3, 'BeiHai'],
+            //     [4, 'PuChan'],
+            //     [56, 'GuDong'],
+            //     [78, 'ZhongHe'],
+            //     [89, 'TengYue'],
+            //     [90, 'DianTan'],
+            //     [23, 'MingGuang'],
+            //     [24, 'HouQiao']
+            // ]
+            function refresh_horizhist_Data(Cases_Number_Monthly, start_current_data, end_current_data) {
+                var data_set_from_json = [];
+                // data_set_from_json.push(['amount', 'townname']);
+                // var agency = [];
+                // data_set_from_json.push(agency);
+
+
+                var date_set_from_json = [];
+                var TownName_set_from_json = [];
+                var a;
+                // console.log(Date.parse("2019/2/3"));
+                // console.log(Date.parse("2019/12/1"));
+                // if (Date.parse("2019/2/3") > Date.parse("2019/12/1"))
+                //     console.log("xx")
+                Cases_Number_Monthly.casenumbermonthly.forEach(element => {
+                    a = element['Month'].split("/");
+                    a = a[2] + '/' + a[0] + '/' + a[1];
+
+                    if (Date.parse(a) >= Date.parse(start_current_data) && Date.parse(a) <= Date.parse(end_current_data)) {
+                        // console.log("a = ??>>" + a)
+                        TownName_set_from_json.push(element['TownName']);
+                        a = element['Month'].split("/");
+                        a = a[2] + '/' + a[0] + '/' + a[1];
+                        date_set_from_json.push(a);
+                    }
+                });
+                // 数组去重
+                date_set_from_json = [...new Set(date_set_from_json)];
+                // console.log(date_set_from_json)
+                TownName_set_from_json = [...new Set(TownName_set_from_json)];
+
+                var data_set_from_json = new Array(TownName_set_from_json.length);
+                for (var i = 0; i < data_set_from_json.length; i++) {
+                    data_set_from_json[i] = new Array(date_set_from_json.length);
+                }
+
+
+                Cases_Number_Monthly.casenumbermonthly.forEach(element => {
+                    a = element['Month'].split("/");
+                    a = a[2] + '/' + a[0] + '/' + a[1];
+
+                    if (Date.parse(a) >= Date.parse(start_current_data) && Date.parse(a) <= Date.parse(end_current_data)) {
+                        TownName_set_from_json.findIndex(function(TownName_value, TownName_index) {
+                            if (TownName_value === element['TownName']) {
+                                //则包含该元素
+                                a = element['Month'].split("/");
+                                a = a[2] + '/' + a[0] + '/' + a[1];
+                                date_set_from_json.findIndex(function(date_value, date_index) {
+                                    if (date_value === a) {
+                                        //则包含该元素
+                                        data_set_from_json[TownName_index][date_index] = element['The number of cases']
+                                            // agency.push(date_index)
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                });
+                // console.log(data_set_from_json)
+                for (var i = 0; i < data_set_from_json.length; i++) {
+                    data_set_from_json[i] = eval(data_set_from_json[i].join("+"))
+                }
+
+                var data_set1_from_json = []
+                    // console.log(tengchongdata.features[0])
+                    // tengchongdata.features.forEach(element => {
+                for (var i = 0; i < data_set_from_json.length; i++) {
+                    var agency = [];
+                    agency.push(data_set_from_json[i]);
+                    agency.push(TownName_set_from_json[i]);
+                    data_set1_from_json.push(agency)
+                }
+                // townname.push(element.properties.name);
+                // childNum.push(element.properties.childNum);
+                // });
+                // console.log(data_set_from_json)
+                // data_set_from_json.sort();
+                // data_set_from_json.reverse();
+
+
+                // ------------冒泡排序法(升序)-----------
+                // var arr = [3, 4, 1, 2];
+
+                // function bubbleSort(arr) {
+                //     for (var j = 0; j < arr.length - 1; j++) {
+                //         // 这里要根据外层for循环的 j，逐渐减少内层 for循环的次数
+                //         for (var i = 0; i < arr.length - 1 - j; i++) {
+                //             if (arr[i] > arr[i + 1]) {
+                //                 var temp = arr[i];
+                //                 arr[i] = arr[i + 1];
+                //                 arr[i + 1] = temp;
+                //             }
+                //         }
+                //     }
+                //     return arr;
+                // }
+                // bubbleSort(arr);
+                // console.log(arr);
+                // ------------冒泡排序法(升序)-----------
+
+                // ------------冒泡排序法(降序)-----------
+                function bubbleSort(arr) {
+                    var max = arr.length - 1;
+                    for (var j = 0; j < max; j++) {
+                        // 声明一个变量，作为标志位
+                        var done = true;
+                        for (var i = 0; i < max - j; i++) {
+                            if (arr[i][0] < arr[i + 1][0]) {
+                                var temp = arr[i];
+                                arr[i] = arr[i + 1];
+                                arr[i + 1] = temp;
+                                done = false;
+                            }
+                        }
+                        if (done) {
+                            break;
+                        }
+                    }
+                    return arr;
+                }
+                bubbleSort(data_set1_from_json)
+
+                // ----对应颜色改变
+                var color_list = [];
+
+                for (var i = 0; i < data_set1_from_json.length; i++) {
+                    // color_list.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]]])
+                    color_list.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
+                        // console.log(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
+                        // console.log(window.geojson_info[data_set1_from_json[i][1]])
+                }
+                // console.log(data_set1_from_json)
+                // 查看颜色的循序
+                // console.log(color_list)
+
+                window.horizhist_option = {
+                    title: {
+                        top: '0%',
+                        left: 'center',
+                        text: 'Rank of Case Number',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    grid: { containLabel: true },
+                    xAxis: { name: 'amount' },
+                    yAxis: {
+                        type: 'category',
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+
+                                fontSize: '9'
+                            }
+                        },
+                        inverse: true
+                    },
+
+                    grid: {
+                        left: '11%',
+                        top: '8%',
+                        right: '10%',
+                        bottom: '10%',
+
+
+                    },
+                    series: [{
+
+                        type: 'bar',
+                        encode: {
+
+                            x: 'amount',
+
+                            y: 'townname'
+                        },
+                        // 为每个柱子给定颜色，不够的话开始循环
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                // 循环这样子方便点 
+                                color: function(params) {
+                                    var colorList = color_list;
+                                    return colorList[params.dataIndex % colorList.length];
+                                }
+                            }
+                        },
+                        data: data_set1_from_json
+                    }]
+                };
+
+                // ----对应颜色改变
+                return data_set1_from_json;
+
+            }
+
+            // ----------------读取和处理柱状图的数据---------------
             var end_current_data = ''
 
             // 如果只拉动时间轴
             if (param.dataZoomId) {
-                // console.log(param)
-                end_current_data = xAxis.data[Math.round(param.end / (100 / parseInt(xAxis.data.length - 1)))]
-                start_current_data = xAxis.data[Math.round(param.start / (100 / parseInt(xAxis.data.length - 1)))]
-                console.log(start_current_data)
-                console.log(end_current_data)
-                    // 如果是对图形进行缩放
+                // console.log(param.dataZoomId)
+                if (param.dataZoomId.indexOf('2') != -1) {
+                    // console.log(param)
+                    end_current_data = xAxis.data[Math.round(param.end / (100 / parseInt(xAxis.data.length - 1)))]
+                    start_current_data = xAxis.data[Math.round(param.start / (100 / parseInt(xAxis.data.length - 1)))]
+                    console.log(start_current_data)
+                    console.log(end_current_data)
+                        // console.log(window.horizhist_option.series[0].itemStyle.normal.color)
+                    window.horizhist_option.series[0].data = refresh_horizhist_Data(Cases_Number_Monthly, start_current_data, end_current_data);
+                    // window.horizhist_myChart.setOption({ series: window.horizhist_option.series }, {
+                    //     notMerge: false
+                    //         // replaceMerge: ['series']
+                    //         // lazyUpdate:false
+                    // });
+                    // console.log(window.horizhist_option.series[0].itemStyle.normal.color)
+                    window.horizhist_myChart.setOption(window.horizhist_option);
+                }
+                // 如果是对图形进行缩放
             } else {
                 if (param.batch[1]) {
                     end_current_data = xAxis.data[Math.round(param.batch[1].end / (100 / parseInt(xAxis.data.length - 1)))]
                     start_current_data = xAxis.data[Math.round(param.batch[1].start / (100 / parseInt(xAxis.data.length - 1)))]
                     console.log(start_current_data)
                     console.log(end_current_data)
+                    window.horizhist_option.series[0].data = refresh_horizhist_Data(Cases_Number_Monthly, start_current_data, end_current_data);
+                    // window.horizhist_myChart.setOption({ series: window.horizhist_option.series }, {
+                    //     notMerge: false
+                    //         // replaceMerge: ['series']
+                    //         // lazyUpdate:false
+                    // });
+                    window.horizhist_myChart.setOption(window.horizhist_option);
                 }
             }
         });

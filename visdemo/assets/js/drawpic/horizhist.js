@@ -9,7 +9,7 @@
     $.get('json/Cases Number Monthly.json', function(Cases_Number_Monthly) {
 
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('youxiajiao'));
+        window.horizhist_myChart = echarts.init(document.getElementById('youxiajiao'));
 
         // 指定图表的配置项和数据
         // var townname = ['townname'];
@@ -24,12 +24,12 @@
         var TownName_set_from_json = [];
         var a;
         Cases_Number_Monthly.casenumbermonthly.forEach(element => {
-            if (element['Attributes'] === 'Historical') {
-                TownName_set_from_json.push(element['TownName']);
-                a = element['Month'].split("/");
-                a = a[2] + '/' + a[0] + '/' + a[1];
-                date_set_from_json.push(a);
-            }
+            // if (element['Attributes'] === 'Historical') {
+            TownName_set_from_json.push(element['TownName']);
+            a = element['Month'].split("/");
+            a = a[2] + '/' + a[0] + '/' + a[1];
+            date_set_from_json.push(a);
+            // }
         });
         // 数组去重
         date_set_from_json = [...new Set(date_set_from_json)];
@@ -44,8 +44,8 @@
 
         Cases_Number_Monthly.casenumbermonthly.forEach(element => {
 
-            if (element['Attributes'] === 'Historical') {
-                TownName_set_from_json.findIndex(function(TownName_value, TownName_index) {
+            // if (element['Attributes'] === 'Historical') {
+            TownName_set_from_json.findIndex(function(TownName_value, TownName_index) {
                     if (TownName_value === element['TownName']) {
                         //则包含该元素
                         a = element['Month'].split("/");
@@ -60,7 +60,7 @@
                         })
                     }
                 })
-            }
+                // }
         });
         // console.log(data_set_from_json)
         for (var i = 0; i < data_set_from_json.length; i++) {
@@ -155,7 +155,7 @@
         // ]
         // console.log(data_set.length)
 
-        option = {
+        window.horizhist_option = {
             title: {
                 top: '0%',
                 left: 'center',
@@ -170,10 +170,10 @@
             // dataset: {
             //     source: data_set_from_json
             // },
-            dataset: {
-                // source: data_set
-                source: data_set1_from_json
-            },
+            // dataset: {
+            //     // source: data_set
+            //     source: data_set1_from_json
+            // },
             grid: { containLabel: true },
             xAxis: { name: 'amount' },
             yAxis: {
@@ -224,21 +224,25 @@
                         //这里是重点
                         // 循环这样子方便点 
                         color: function(params) {
-                            var colorList = ['#FF4933', '#3498DB', '#F4D03F ', '#6C3483 ', '#FF8C33', '#2ECC71', '#2980B9', '#33B7FF', '#334EFF', '#CB33FF', '#943126', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622'];
+                            // var colorList = ['#FF4933', '#3498DB', '#F4D03F ', '#6C3483 ', '#FF8C33', '#2ECC71', '#2980B9', '#33B7FF', '#334EFF', '#CB33FF', '#943126', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622'];
+                            var colorList = ["rgba(148,49,38, 1)", "rgba(108,52,131, 1)", "rgba(244,208,63, 1)", "rgba(255,140,51, 1)", "rgba(202,134,34, 1)", "rgba(255,73,51, 1)", "rgba(116,159,131, 1)", "rgba(212,130,101, 1)", "rgba(97,160,168, 1)", "rgba(47,69,84, 1)", "rgba(51,183,255, 1)", "rgba(194,53,49, 1)", "rgba(203,51,255, 1)", "rgba(46,204,113, 1)", "rgba(41,128,185, 1)", "rgba(52,152,219, 1)", "rgba(51,78,255, 1)", "rgba(145,199,174, 1)"]
                             return colorList[params.dataIndex % colorList.length];
                         }
                     }
-                }
+                },
+                data: data_set1_from_json
             }]
         };
 
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        // console.log(data_set1_from_json)
+        window.horizhist_myChart.setOption(window.horizhist_option);
+
 
 
         // 把配置项给实例对象，跟着浏览器同比例缩放
         window.addEventListener('resize', function() {
-            myChart.resize();
+            window.horizhist_myChart.resize();
         })
 
     });
