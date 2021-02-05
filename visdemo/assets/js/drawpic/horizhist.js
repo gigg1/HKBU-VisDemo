@@ -154,6 +154,20 @@
         //     [24, 'HouQiao']
         // ]
         // console.log(data_set.length)
+        window.horizhist_data_set1_from_json = data_set1_from_json
+        window.horizhist_colorlist = [];
+        window.horizhist_colorlist_clear = [];
+
+        window.horizhist_arealist = [];
+
+        for (var i = 0; i < data_set1_from_json.length; i++) {
+            // color_list.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]]])
+            // window.horizhist_colorlist.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
+            window.horizhist_colorlist.push(window.colorList[window.relation_between_area_colorlist[data_set1_from_json[i][1]]])
+            window.horizhist_arealist.push(data_set1_from_json[i][1])
+                // console.log(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
+                // console.log(window.geojson_info[data_set1_from_json[i][1]])
+        }
 
         window.horizhist_option = {
             title: {
@@ -225,7 +239,11 @@
                         // 循环这样子方便点 
                         color: function(params) {
                             // var colorList = ['#FF4933', '#3498DB', '#F4D03F ', '#6C3483 ', '#FF8C33', '#2ECC71', '#2980B9', '#33B7FF', '#334EFF', '#CB33FF', '#943126', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622'];
-                            var colorList = ["rgba(148,49,38, 1)", "rgba(108,52,131, 1)", "rgba(244,208,63, 1)", "rgba(255,140,51, 1)", "rgba(202,134,34, 1)", "rgba(255,73,51, 1)", "rgba(116,159,131, 1)", "rgba(212,130,101, 1)", "rgba(97,160,168, 1)", "rgba(47,69,84, 1)", "rgba(51,183,255, 1)", "rgba(194,53,49, 1)", "rgba(203,51,255, 1)", "rgba(46,204,113, 1)", "rgba(41,128,185, 1)", "rgba(52,152,219, 1)", "rgba(51,78,255, 1)", "rgba(145,199,174, 1)"]
+                            // window.horizhist_colorlist = ["rgba(148,49,38, 1)", "rgba(108,52,131, 1)", "rgba(244,208,63, 1)", "rgba(255,140,51, 1)", "rgba(202,134,34, 1)", "rgba(255,73,51, 1)", "rgba(116,159,131, 1)", "rgba(212,130,101, 1)", "rgba(97,160,168, 1)", "rgba(47,69,84, 1)", "rgba(51,183,255, 1)", "rgba(194,53,49, 1)", "rgba(203,51,255, 1)", "rgba(46,204,113, 1)", "rgba(41,128,185, 1)", "rgba(52,152,219, 1)", "rgba(51,78,255, 1)", "rgba(145,199,174, 1)"]
+                            // var colorList = window.colorList
+                            // window.horizhist_colorlist_clear = ["rgba(148,49,38, 0.1)", "rgba(108,52,131, 0.1)", "rgba(244,208,63, 0.1)", "rgba(255,140,51, 0.1)", "rgba(202,134,34, 0.1)", "rgba(255,73,51, 0.1)", "rgba(116,159,131, 0.1)", "rgba(212,130,101, 0.1)", "rgba(97,160,168, 0.1)", "rgba(47,69,84, 0.1)", "rgba(51,183,255, 0.1)", "rgba(194,53,49, 0.1)", "rgba(203,51,255, 0.1)", "rgba(46,204,113, 0.1)", "rgba(41,128,185, 0.1)", "rgba(52,152,219, 0.1)", "rgba(51,78,255, 0.1)", "rgba(145,199,174, 0.1)"]
+                            var colorList = window.horizhist_colorlist;
+                            // return window.horizhist_colorlist[params.dataIndex % window.horizhist_colorlist.length];
                             return colorList[params.dataIndex % colorList.length];
                         }
                     }

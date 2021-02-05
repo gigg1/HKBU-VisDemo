@@ -1,18 +1,22 @@
 // 采用立即执行函数(function(){})();
 
 (function() {
+    window.colorList_clear = ['rgba(255,73,51, 0.1)', 'rgba(52,152,219, 0.1)', 'rgba(244,208,63, 0.1)', 'rgba(108,52,131, 0.1)', 'rgba(255,140,51, 0.1)', 'rgba(46,204,113, 0.1)', 'rgba(41,128,185, 0.1)', 'rgba(51,183,255, 0.1)', 'rgba(51,78,255, 0.1)', 'rgba(203,51,255, 0.1)', 'rgba(148,49,38, 0.1)', 'rgba(194,53,49, 0.1)', 'rgba(47,69,84, 0.1)', 'rgba(97,160,168, 0.1)', 'rgba(212,130,101, 0.1)', 'rgba(145,199,174, 0.1)', 'rgba(116,159,131, 0.1)', 'rgba(202,134,34, 0.1)'];
+    window.colorList = ['rgba(255,73,51, 1)', 'rgba(52,152,219, 1)', 'rgba(244,208,63, 1)', 'rgba(108,52,131, 1)', 'rgba(255,140,51, 1)', 'rgba(46,204,113, 1)', 'rgba(41,128,185, 1)', 'rgba(51,183,255, 1)', 'rgba(51,78,255, 1)', 'rgba(203,51,255, 1)', 'rgba(148,49,38, 1)', 'rgba(194,53,49, 1)', 'rgba(47,69,84, 1)', 'rgba(97,160,168, 1)', 'rgba(212,130,101, 1)', 'rgba(145,199,174, 1)', 'rgba(116,159,131, 1)', 'rgba(202,134,34, 1)'];
 
     $.get('json/Export_Output.json', function(geojson_info) {
         window.geojson_info = new Array();
         window.area_chosen_state = new Array();
+        window.relation_between_area_colorlist = new Array();
+
         geojson_info.features.forEach(element => {
             window.geojson_info[element.properties.name] = element.properties.id + 1;
             window.area_chosen_state[element.id] = false;
+            window.relation_between_area_colorlist[element.properties.name] = window.colorList.indexOf(window.colorList[element.properties.id])
 
         });
     });
-    // console.log(window.geojson_info)
-
+    // console.log(window.relation_between_area_colorlist)
 
     $.get('json/Cases Number Monthly.json', function(Cases_Number_Monthly) {
 
@@ -226,22 +230,87 @@
             var muti_chosen_mark = false;
             // When the user moves their mouse over the state-fill layer, we'll update the
             // feature state for the feature under the mouse.
-            window.colorList_clear = ['rgba(255,73,51, 0.1)', 'rgba(52,152,219, 0.1)', 'rgba(244,208,63, 0.1)', 'rgba(108,52,131, 0.1)', 'rgba(255,140,51, 0.1)', 'rgba(46,204,113, 0.1)', 'rgba(41,128,185, 0.1)', 'rgba(51,183,255, 0.1)', 'rgba(51,78,255, 0.1)', 'rgba(203,51,255, 0.1)', 'rgba(148,49,38, 0.1)', 'rgba(194,53,49, 0.1)', 'rgba(47,69,84, 0.1)', 'rgba(97,160,168, 0.1)', 'rgba(212,130,101, 0.1)', 'rgba(145,199,174, 0.1)', 'rgba(116,159,131, 0.1)', 'rgba(202,134,34, 0.1)'];
+            // window.colorList_clear = ['rgba(255,73,51, 0.1)', 'rgba(52,152,219, 0.1)', 'rgba(244,208,63, 0.1)', 'rgba(108,52,131, 0.1)', 'rgba(255,140,51, 0.1)', 'rgba(46,204,113, 0.1)', 'rgba(41,128,185, 0.1)', 'rgba(51,183,255, 0.1)', 'rgba(51,78,255, 0.1)', 'rgba(203,51,255, 0.1)', 'rgba(148,49,38, 0.1)', 'rgba(194,53,49, 0.1)', 'rgba(47,69,84, 0.1)', 'rgba(97,160,168, 0.1)', 'rgba(212,130,101, 0.1)', 'rgba(145,199,174, 0.1)', 'rgba(116,159,131, 0.1)', 'rgba(202,134,34, 0.1)'];
             map.on('mousemove', 'rwanda-provinces', function(e) {
                 // console.log(window.hl_line_mark)
                 // console.log(e.features[0].properties.id)
                 if (!muti_chosen_mark) {
+
+                    // var color_list = new Array(window.horizhist_colorlist.length);
+
+
                     if (window.hl_line_mark != e.features[0].properties.id) {
                         for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
                             // console.log(window.linetrend_option.series[i + 1].name);
                             // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
                             window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                            window.horizhist_colorlist[window.horizhist_arealist.indexOf(window.linetrend_option.series[i + 1].name)] = window.colorList[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]]
                         }
                         window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
                             notMerge: false
                                 // replaceMerge: ['series']
                                 // lazyUpdate:false
                         });
+
+                        window.horizhist_option = {
+                            title: {
+                                top: '0%',
+                                left: 'center',
+                                text: 'Rank of Case Number',
+                            },
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                }
+                            },
+                            grid: { containLabel: true },
+                            xAxis: { name: 'amount' },
+                            yAxis: {
+                                type: 'category',
+                                axisLabel: {
+                                    show: true,
+                                    textStyle: {
+
+                                        fontSize: '9'
+                                    }
+                                },
+                                inverse: true
+                            },
+
+                            grid: {
+                                left: '11%',
+                                top: '8%',
+                                right: '10%',
+                                bottom: '10%',
+
+
+                            },
+                            series: [{
+
+                                type: 'bar',
+                                encode: {
+
+                                    x: 'amount',
+
+                                    y: 'townname'
+                                },
+                                // 为每个柱子给定颜色，不够的话开始循环
+                                itemStyle: {
+                                    normal: {
+                                        //这里是重点
+                                        // 循环这样子方便点 
+                                        color: function(params) {
+                                            var colorList = window.horizhist_colorlist;
+                                            return colorList[params.dataIndex % colorList.length];
+                                        }
+                                    }
+                                },
+                                data: window.horizhist_data_set1_from_json
+                            }]
+                        };
+                        window.horizhist_myChart.setOption(window.horizhist_option);
+
                         // console.log(hl_line_mark);
                         // console.log(e.features[0].properties)
                         // console.log(e.features[0].properties.name);
@@ -250,9 +319,18 @@
                         // console.log(window.linetrend_option.series[1].name);
                         for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
                             // console.log(window.linetrend_option.series[i + 1].name);
-                            if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
+                            if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name) {
                                 window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
+                                    // color_list[color_list.indexOf(window.colorList[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]])] = window.colorList_clear[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]]
+                                window.horizhist_colorlist[window.horizhist_arealist.indexOf(window.linetrend_option.series[i + 1].name)] = window.colorList_clear[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]]
+                            }
+
+
                         }
+
+                        // console.log(e.features[0].properties.name)
+                        // console.log(window.relation_between_area_colorlist[e.features[0].properties.name])
+                        // console.log(window.colorList[window.relation_between_area_colorlist[e.features[0].properties.name]])
                         // console.log(window.linetrend_myChart.getOption())
                         // window.linetrend_myChart.setOption(window.linetrend_option);
                         window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
@@ -260,6 +338,69 @@
                                 // replaceMerge: ['series']
                                 // lazyUpdate:false
                         });
+
+                        window.horizhist_option = {
+                            title: {
+                                top: '0%',
+                                left: 'center',
+                                text: 'Rank of Case Number',
+                            },
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                }
+                            },
+                            grid: { containLabel: true },
+                            xAxis: { name: 'amount' },
+                            yAxis: {
+                                type: 'category',
+                                axisLabel: {
+                                    show: true,
+                                    textStyle: {
+
+                                        fontSize: '9'
+                                    }
+                                },
+                                inverse: true
+                            },
+
+                            grid: {
+                                left: '11%',
+                                top: '8%',
+                                right: '10%',
+                                bottom: '10%',
+
+
+                            },
+                            series: [{
+
+                                type: 'bar',
+                                encode: {
+
+                                    x: 'amount',
+
+                                    y: 'townname'
+                                },
+                                // 为每个柱子给定颜色，不够的话开始循环
+                                itemStyle: {
+                                    normal: {
+                                        //这里是重点
+                                        // 循环这样子方便点 
+                                        color: function(params) {
+                                            var colorList = window.horizhist_colorlist;
+                                            return colorList[params.dataIndex % colorList.length];
+                                        }
+                                    }
+                                },
+                                data: window.horizhist_data_set1_from_json
+                            }]
+                        };
+                        window.horizhist_myChart.setOption(window.horizhist_option);
+
+
+
+
                         window.hl_line_mark = e.features[0].properties.id;
 
                     }
@@ -309,15 +450,20 @@
                 //     .setLngLat(e.lngLat)
                 //     .setHTML(e.features[0].properties.childNum)
                 //     .addTo(map);
-
+                // var color_list = new Array(window.horizhist_colorlist.length);
                 for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
+
                     // console.log(window.linetrend_option.series[i + 1].name);
                     if (window.linetrend_option.series[i + 1].name == e.features[0].properties.name) {
                         // console.log(area_chosen_state[e.features[0].id])
                         if (area_chosen_state[e.features[0].id]) {
                             window.linetrend_option.series[i + 1].itemStyle.color = window.colorList_clear[i]
+                            window.horizhist_colorlist[window.horizhist_arealist.indexOf(window.linetrend_option.series[i + 1].name)] = window.colorList_clear[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]]
+
                         } else {
                             window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                            window.horizhist_colorlist[window.horizhist_arealist.indexOf(window.linetrend_option.series[i + 1].name)] = window.colorList[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]]
+
                         }
                     }
                 }
@@ -328,6 +474,66 @@
                         // replaceMerge: ['series']
                         // lazyUpdate:false
                 });
+
+
+                window.horizhist_option = {
+                    title: {
+                        top: '0%',
+                        left: 'center',
+                        text: 'Rank of Case Number',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    grid: { containLabel: true },
+                    xAxis: { name: 'amount' },
+                    yAxis: {
+                        type: 'category',
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+
+                                fontSize: '9'
+                            }
+                        },
+                        inverse: true
+                    },
+
+                    grid: {
+                        left: '11%',
+                        top: '8%',
+                        right: '10%',
+                        bottom: '10%',
+
+
+                    },
+                    series: [{
+
+                        type: 'bar',
+                        encode: {
+
+                            x: 'amount',
+
+                            y: 'townname'
+                        },
+                        // 为每个柱子给定颜色，不够的话开始循环
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                // 循环这样子方便点 
+                                color: function(params) {
+                                    var colorList = window.horizhist_colorlist;
+                                    return colorList[params.dataIndex % colorList.length];
+                                }
+                            }
+                        },
+                        data: window.horizhist_data_set1_from_json
+                    }]
+                };
+                window.horizhist_myChart.setOption(window.horizhist_option);
 
 
 
@@ -366,17 +572,85 @@
             map.on('mouseleave', 'rwanda-provinces', function() {
                 if (!muti_chosen_mark) {
                     if (window.hl_line_mark != -1) {
+
+                        // var color_list = new Array(window.horizhist_colorlist.length);
+
                         // console.log(hl_line_mark);
                         for (var i = 0; i < window.linetrend_option.series.length - 1; i++) {
                             // console.log(window.linetrend_option.series[i + 1].name);
                             // if (window.linetrend_option.series[i + 1].name != e.features[0].properties.name)
                             window.linetrend_option.series[i + 1].itemStyle.color = window.colorList[i]
+                            window.horizhist_colorlist[window.horizhist_arealist.indexOf(window.linetrend_option.series[i + 1].name)] = window.colorList[window.relation_between_area_colorlist[window.linetrend_option.series[i + 1].name]]
                         }
                         window.linetrend_myChart.setOption({ series: window.linetrend_option.series }, {
                             notMerge: false
                                 // replaceMerge: ['series']
                                 // lazyUpdate:false
                         });
+
+
+                        window.horizhist_option = {
+                            title: {
+                                top: '0%',
+                                left: 'center',
+                                text: 'Rank of Case Number',
+                            },
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                }
+                            },
+                            grid: { containLabel: true },
+                            xAxis: { name: 'amount' },
+                            yAxis: {
+                                type: 'category',
+                                axisLabel: {
+                                    show: true,
+                                    textStyle: {
+
+                                        fontSize: '9'
+                                    }
+                                },
+                                inverse: true
+                            },
+
+                            grid: {
+                                left: '11%',
+                                top: '8%',
+                                right: '10%',
+                                bottom: '10%',
+
+
+                            },
+                            series: [{
+
+                                type: 'bar',
+                                encode: {
+
+                                    x: 'amount',
+
+                                    y: 'townname'
+                                },
+                                // 为每个柱子给定颜色，不够的话开始循环
+                                itemStyle: {
+                                    normal: {
+                                        //这里是重点
+                                        // 循环这样子方便点 
+                                        color: function(params) {
+                                            var colorList = window.horizhist_colorlist;
+                                            return colorList[params.dataIndex % colorList.length];
+                                        }
+                                    }
+                                },
+                                data: window.horizhist_data_set1_from_json
+                            }]
+                        };
+                        window.horizhist_myChart.setOption(window.horizhist_option);
+
+
+
+
                         window.hl_line_mark = -1;
 
                     }
@@ -500,7 +774,7 @@
         // console.log(data_set_from_json)
         var series_all_sum = [];
         // var colorList = ['#FF4933', '#3498DB', '#F4D03F ', '#6C3483 ', '#FF8C33', '#2ECC71', '#2980B9', '#33B7FF', '#334EFF', '#CB33FF', '#943126', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622'];
-        window.colorList = ['rgba(255,73,51, 1)', 'rgba(52,152,219, 1)', 'rgba(244,208,63, 1)', 'rgba(108,52,131, 1)', 'rgba(255,140,51, 1)', 'rgba(46,204,113, 1)', 'rgba(41,128,185, 1)', 'rgba(51,183,255, 1)', 'rgba(51,78,255, 1)', 'rgba(203,51,255, 1)', 'rgba(148,49,38, 1)', 'rgba(194,53,49, 1)', 'rgba(47,69,84, 1)', 'rgba(97,160,168, 1)', 'rgba(212,130,101, 1)', 'rgba(145,199,174, 1)', 'rgba(116,159,131, 1)', 'rgba(202,134,34, 1)'];
+        // window.colorList = ['rgba(255,73,51, 1)', 'rgba(52,152,219, 1)', 'rgba(244,208,63, 1)', 'rgba(108,52,131, 1)', 'rgba(255,140,51, 1)', 'rgba(46,204,113, 1)', 'rgba(41,128,185, 1)', 'rgba(51,183,255, 1)', 'rgba(51,78,255, 1)', 'rgba(203,51,255, 1)', 'rgba(148,49,38, 1)', 'rgba(194,53,49, 1)', 'rgba(47,69,84, 1)', 'rgba(97,160,168, 1)', 'rgba(212,130,101, 1)', 'rgba(145,199,174, 1)', 'rgba(116,159,131, 1)', 'rgba(202,134,34, 1)'];
         // console.log(colorList.length)
         window.hl_line_mark = -1;
 
@@ -1029,12 +1303,19 @@
                 }
                 bubbleSort(data_set1_from_json)
 
+                window.horizhist_data_set1_from_json = data_set1_from_json
+
                 // ----对应颜色改变
-                var color_list = [];
+                window.horizhist_colorlist = [];
+                window.horizhist_colorlist_clear = [];
+
+                window.horizhist_arealist = [];
 
                 for (var i = 0; i < data_set1_from_json.length; i++) {
                     // color_list.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]]])
-                    color_list.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
+                    // window.horizhist_colorlist.push(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
+                    window.horizhist_colorlist.push(window.colorList[window.relation_between_area_colorlist[data_set1_from_json[i][1]]])
+                    window.horizhist_arealist.push(data_set1_from_json[i][1])
                         // console.log(window.colorList[window.geojson_info[data_set1_from_json[i][1]] - 1])
                         // console.log(window.geojson_info[data_set1_from_json[i][1]])
                 }
@@ -1091,7 +1372,7 @@
                                 //这里是重点
                                 // 循环这样子方便点 
                                 color: function(params) {
-                                    var colorList = color_list;
+                                    var colorList = window.horizhist_colorlist;
                                     return colorList[params.dataIndex % colorList.length];
                                 }
                             }
