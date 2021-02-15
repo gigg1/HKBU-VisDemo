@@ -5,6 +5,8 @@
     window.colorList = ['rgba(255,73,51, 1)', 'rgba(52,152,219, 1)', 'rgba(244,208,63, 1)', 'rgba(108,52,131, 1)', 'rgba(255,140,51, 1)', 'rgba(46,204,113, 1)', 'rgba(41,128,185, 1)', 'rgba(51,183,255, 1)', 'rgba(51,78,255, 1)', 'rgba(203,51,255, 1)', 'rgba(148,49,38, 1)', 'rgba(194,53,49, 1)', 'rgba(47,69,84, 1)', 'rgba(97,160,168, 1)', 'rgba(212,130,101, 1)', 'rgba(145,199,174, 1)', 'rgba(116,159,131, 1)', 'rgba(202,134,34, 1)'];
 
     $.get('json/Export_Output.json', function(geojson_info) {
+        window.raw_geojson_info = geojson_info;
+        window.raw_default_area_list = [];
         window.geojson_info = new Array();
         window.area_chosen_state = new Array();
         window.relation_between_area_ID = new Array();
@@ -14,6 +16,7 @@
             window.geojson_info[element.properties.name] = element.properties.id + 1;
             window.area_chosen_state[element.id] = false;
             window.relation_between_area_ID[element.id] = element.properties.name;
+            window.raw_default_area_list.push(element.properties.name)
             window.relation_between_area_colorlist[element.properties.name] = window.colorList.indexOf(window.colorList[element.properties.id])
 
         });
@@ -114,7 +117,8 @@
             map.addSource('rwanda-provinces', {
                 'type': 'geojson',
                 // 'data': 'https://docs.mapbox.com/mapbox-gl-js/assets/rwanda-provinces.geojson'
-                'data': 'json/Export_Output.json'
+                // 'data': 'json/Export_Output.json'
+                'data': window.raw_geojson_info
             });
 
 
@@ -221,6 +225,11 @@
                     "text-offset": [0, 1.25], //设置图标与图标注相对之间的距离
                     "text-anchor": "top",
                     "icon-size": ["get", "childNum"], //图标的大小
+                    // "icon-size": ['1.0', '0.3', '0.5', '0.8', '0.7', '0.6', '0.3', '0.4', '0.5', '0.6', '0.8', '0.9', '0.7', '0.4', '0.6', '0.5', '0.5', '1.0'], //图标的大小
+                    // "icon-size": ["1.0", "0.3", "0.5", "0.8", "0.7", "0.6", "0.3", " 0.4", "0.5", "0.6", "0.8", "0.9", "0.7", "0.4", "0.6", "0.5", "0.5", "1.0"], //图标的大小
+                    // "icon-size": [1.0, 0.3, 0.5, 0.8, 0.7, 0.6, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9, 0.7, 0.4, 0.6, 0.5, 0.5, 1.0], //图标的大小
+                    // "icon-size": [] //图标的大小
+                    // "icon-size": ["childNum"], //图标的大小
                 },
                 'paint': {
                     "text-halo-color": "rgb(255,255,255)",
@@ -1547,6 +1556,45 @@
 
 
                 // ----对应颜色改变
+
+
+
+
+                // 对应变动地图的icon图标大小
+                // console.log(window.horizhist_data_set1_from_json.length)
+                // abc = map.getLayoutProperty('points', 'icon-size');
+                // console.log(abc)
+                // map.setLayoutProperty('points', 'icon-size', 0.1);
+                // console.log(window.raw_geojson_info.features[0].properties.childNum)
+                // window.raw_geojson_info.features[0].properties.childNum = 0.1
+
+                var raw_default_area_list_childNum = new Array(window.horizhist_data_set1_from_json.length);
+                for (var i in window.horizhist_data_set1_from_json) {
+                    for (var j in window.raw_default_area_list) {
+                        if (window.horizhist_data_set1_from_json[i][1] == window.raw_default_area_list[j]) {
+                            raw_default_area_list_childNum[j] = window.horizhist_data_set1_from_json[i][0]
+                                // window.raw_geojson_info.features[0].properties.childNum = 0.1
+                        }
+                    }
+                }
+                // 将获取的数据进行归一化处理
+                var min_in_childNum = window.horizhist_data_set1_from_json[window.horizhist_data_set1_from_json.length - 1][0];
+                var max_in_childNum = window.horizhist_data_set1_from_json[0][0];
+                var distance_maxmin = max_in_childNum - min_in_childNum;
+
+                for (var j in raw_default_area_list_childNum) {
+                    raw_default_area_list_childNum[j] = ((raw_default_area_list_childNum[j] - min_in_childNum) / distance_maxmin) * 1.0 + 0.1
+                    window.raw_geojson_info.features[j].properties.childNum = raw_default_area_list_childNum[j]
+                }
+                console.log(raw_default_area_list_childNum)
+
+                map.getSource('rwanda-provinces').setData(window.raw_geojson_info);
+                map.setLayoutProperty('points', 'icon-size', ["get", "childNum"]);
+                // 对应变动地图的icon图标大小
+
+
+
+
                 return data_set1_from_json;
 
             }
